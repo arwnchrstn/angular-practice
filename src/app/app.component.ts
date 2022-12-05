@@ -32,4 +32,8 @@ export class AppComponent {
     this.todos.push(this.newTodo);
     this.toggleForm();
   }
+
+  deleteTodo(event: any) {
+    this.todos = this.todos.filter((todo) => todo !== event);
+  }
 }

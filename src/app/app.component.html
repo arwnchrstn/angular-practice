@@ -38,8 +38,11 @@
       No todos available
     </p>
 
-    <ul *ngFor="let todo of todos; let i = index">
-      <li>{{ todo }}</li>
-    </ul>
+    <div *ngFor="let todo of todos; let i = index">
+      <app-todo-item
+        [todoItem]="todo"
+        (deleteEventEmitter)="deleteTodo($event)"
+      ></app-todo-item>
+    </div>
   </section>
 </main>
