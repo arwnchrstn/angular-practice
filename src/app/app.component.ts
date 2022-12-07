@@ -1,22 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { TodoService } from './service/todo.service';
+import {Todos} from '../models'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-  todos: string[];
-  newTodo: string;
-  showForm: boolean;
+export class AppComponent implements OnInit{
+  todos: Todos[] | null | undefined
+  newTodo!: string;
+  showForm!: boolean;
 
-  constructor() {
-    this.todos = [];
-    this.showForm = false;
-    this.newTodo = '';
+  constructor(private todoService: TodoService) {
+    
   }
 
-  toggleForm() {
+  ngOnInit(): void {
+    this.showForm = false;
+    this.newTodo = '';
+    
+    setTimeout(() => {
+      this.todoService.getTodos().subscribe((data: Todos[]) => {
+        console.log(typeof data)
+        this.todos = data
+      })
+    }, 3000);
+  }
+
+  toggleForm(): void {
     if (this.showForm) {
       this.newTodo = '';
       this.showForm = !this.showForm;
@@ -26,14 +39,14 @@ export class AppComponent {
     this.showForm = !this.showForm;
   }
 
-  addTodo() {
+  addTodo(): void {
     if (!this.newTodo) return;
 
-    this.todos.push(this.newTodo);
+    this.todos?.push({"name": this.newTodo});
     this.toggleForm();
   }
 
-  deleteTodo(event: any) {
-    this.todos = this.todos.filter((todo) => todo !== event);
+  deleteTodo(event: string | number): void {
+    this.todos = this.todos?.filter((todo) => todo.name !== event);
   }
 }

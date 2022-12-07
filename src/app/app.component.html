@@ -34,13 +34,21 @@
   </ng-container>
 
   <section class="mt-4 border w-25 mx-auto p-3 rounded">
-    <p class="fw-bold text-center" [ngClass]="{ 'd-none': todos.length !== 0 }">
+    <p [ngClass]="{'d-none' : todos}" class="text-center">
+      Loading...
+      <span class="spinner-border spinner-border-sm" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </span>
+    </p>
+    
+    <p class="fw-bold text-center" [ngClass]="{ 'd-none': todos?.length !== 0 }">
       No todos available
     </p>
 
     <div *ngFor="let todo of todos; let i = index">
+      
       <app-todo-item
-        [todoItem]="todo"
+        [todoItem]="todo.name"
         (deleteEventEmitter)="deleteTodo($event)"
       ></app-todo-item>
     </div>
