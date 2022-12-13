@@ -1,0 +1,24 @@
+<h5 class="fw-bold text-success">Calculate estimated electric bill per month (Meralco)</h5>
+
+<label class="fw-bold mt-2">
+  Enter rate per kWh (PHP): 
+</label>
+<input type="number" name="rate" (ngModelChange)="handleRateChange($event)" [(ngModel)]="rate" class="form-control form-control" min="0">
+
+<form #billsForm="ngForm" (ngSubmit)="handleSubmit(billsForm.value)">
+  <label class="fw-bold mt-2">
+    Enter appliance name and count: 
+  </label>
+  <div class="input-group">
+    <input type="text" name="name" [(ngModel)]="appliance.name" class="form-control form-control" placeholder="Name">
+    <input type="number" name="count" [(ngModel)]="appliance.count" class="form-control form-control" min="1">
+  </div>
+
+  <label class="mt-2 fw-bold">Appliance consumption (watts): </label>
+  <input type="number" name="consumption" min="0" [(ngModel)]="appliance.consumption" class="form-control">
+
+  <label class="mt-2 fw-bold">Appliance runtime per day (hours): </label>
+  <input type="number" name="runtime" min="0" [(ngModel)]="appliance.runtime" class="form-control">
+
+  <button type="submit" class="btn btn-success ms-auto d-block mt-3">Add appliance</button>
+</form>

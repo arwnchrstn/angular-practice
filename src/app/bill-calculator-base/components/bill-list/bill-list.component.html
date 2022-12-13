@@ -1,0 +1,14 @@
+<h5 class="text-success mb-4 fw-bold">Appliance list and estimated bill</h5>
+
+<div class="d-flex align-items-center my-1" *ngFor="let appliance of applianceList">
+  <button class="btn btn-danger btn-sm">Delete</button>
+  
+  <div class="ms-2 d-flex justify-content-between w-100">
+    <p class="m-0 mx-2 fw-bold">{{appliance.name}} (x{{appliance.count}})</p>
+
+    <p class="m-0 mx-2">{{appliance.estimate}}</p>
+  </div>
+
+</div>
+
+<h5 class="text-end text-success fw-bold">Total Estimated Bill: {{total}}</h5>

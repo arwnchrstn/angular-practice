@@ -21,12 +21,9 @@ export class AppComponent implements OnInit{
     this.showForm = false;
     this.newTodo = '';
     
-    setTimeout(() => {
-      this.todoService.getTodos().subscribe((data: Todos[]) => {
-        console.log(typeof data)
-        this.todos = data
-      })
-    }, 3000);
+    this.todoService.getTodos().subscribe((data: Todos[]) => {
+      this.todos = data
+    })
   }
 
   toggleForm(): void {

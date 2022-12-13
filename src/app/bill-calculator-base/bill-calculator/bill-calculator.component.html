@@ -1,0 +1,8 @@
+<section class="my-5 row">
+  <div class="col-md-6">
+    <app-bill-form (formEventEmitter)="addAppliance($event)"></app-bill-form>
+  </div>
+  <div class="col-md-6">
+    <app-bill-list [applianceList]="getAppliances()" [total]="totalEstimate"></app-bill-list>
+  </div>
+</section>
