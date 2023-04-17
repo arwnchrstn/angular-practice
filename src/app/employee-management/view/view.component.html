@@ -1,0 +1,30 @@
+<button
+  class="btn btn-outline-primary btn-sm"
+  [routerLink]="['/employee-management']"
+>
+  Back to list
+</button>
+<hr />
+<div class="row" *ngIf="!isLoading">
+  <div class="col-6">
+    <p class="fw-bold mb-4">Employee Information</p>
+    <ul class="list-group">
+      <li class="list-group-item">{{ selectedEmp.name }}</li>
+      <li class="list-group-item">{{ selectedEmp.department }}</li>
+      <li class="list-group-item">{{ selectedEmp.email }}</li>
+      <li class="list-group-item">{{ selectedEmp.contactNo }}</li>
+    </ul>
+  </div>
+  <div class="col-6">
+    <p class="fw-bold mb-4">Emergency Contacts</p>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let contact of selectedEmp.emergencyContacts"
+      >
+        {{ contact.name }} -
+        {{ contact.contactNo }}
+      </li>
+    </ul>
+  </div>
+</div>

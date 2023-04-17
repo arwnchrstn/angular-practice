@@ -1,0 +1,16 @@
+<p *ngIf="isLoading">Loading...</p>
+
+<div *ngIf="!isLoading">
+  <h5 class="fw-bold">{{ selectedTodo.title }}</h5>
+  <p class="fst-style">{{ selectedTodo.description }}</p>
+  <p>Level: {{ selectedTodo.level }}</p>
+  <p class="text-center" *ngIf="selectedTodo.notes.length === 0">
+    No notes found
+  </p>
+  <ul>
+    <li *ngFor="let note of selectedTodo.notes">{{ note }}</li>
+  </ul>
+</div>
+
+<button class="btn btn-sm btn-warning" (click)="onEdit()">Edit todo</button>
+<button class="btn btn-sm btn-danger" (click)="onDelete()">Delete todo</button>

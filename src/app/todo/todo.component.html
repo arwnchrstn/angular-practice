@@ -1,0 +1,26 @@
+<p *ngIf="isFetching">Loading...</p>
+
+<div class="row" *ngIf="!isFetching">
+  <div class="col-6">
+    <h5 class="fw-bold">List of todos</h5>
+    <button class="btn btn-success btn-sm mb-4" (click)="onClickAdd()">
+      Add todo
+    </button>
+
+    <p class="text-center" *ngIf="todos.length === 0">No todos listed</p>
+
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let todo of todos; let i = index"
+        [routerLink]="[i]"
+        routerLinkActive="active"
+      >
+        {{ todo.title }}
+      </li>
+    </ul>
+  </div>
+  <div class="col-6">
+    <router-outlet></router-outlet>
+  </div>
+</div>

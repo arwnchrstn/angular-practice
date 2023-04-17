@@ -1,0 +1,95 @@
+<h5 class="mb-4">{{ editMode ? "Update" : "Add" }} Employee</h5>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-group mb-3">
+    <label class="fw-bold">Full name</label>
+    <input
+      type="text"
+      class="form-control form-control-sm"
+      formControlName="name"
+    />
+  </div>
+
+  <div class="form-group mb-3">
+    <label class="fw-bold">Email</label>
+    <input
+      type="email"
+      class="form-control form-control-sm"
+      formControlName="email"
+    />
+  </div>
+
+  <div class="form-group mb-3">
+    <label class="fw-bold">Contact number</label>
+    <input
+      type="text"
+      class="form-control form-control-sm"
+      formControlName="contactNo"
+    />
+  </div>
+
+  <div class="form-group mb-3">
+    <label class="fw-bold">Department</label>
+    <select class="form-select form-select-sm" formControlName="department">
+      <option [value]="dept" *ngFor="let dept of departmentOptions">
+        {{ dept }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group mb-3" formArrayName="emergencyContacts">
+    <label class="fw-bold">Emergency contacts</label>
+    <button
+      class="btn btn-success btn-sm d-block"
+      type="button"
+      (click)="onAddEmergencyContact()"
+    >
+      Add contact
+    </button>
+
+    <div
+      class="row my-3"
+      *ngFor="let controls of emergencyContactsArray.controls; let i = index"
+      [formGroupName]="i"
+    >
+      <div class="col-6">
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          placeholder="Full name"
+          formControlName="name"
+        />
+      </div>
+      <div [ngClass]="{ 'col-5': i >= 1, 'col-6': i === 0 }">
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          placeholder="Contact number"
+          formControlName="contactNo"
+        />
+      </div>
+      <div class="col-1" *ngIf="i >= 1">
+        <button
+          class="btn btn-danger btn-sm"
+          type="button"
+          (click)="onDeleteEmergencyContact(i)"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 d-flex gap-2 justify-content-end">
+    <button class="btn btn-sm btn-danger" type="button" (click)="onCancel()">
+      Cancel
+    </button>
+    <button
+      class="btn btn-sm btn-success"
+      type="submit"
+      [disabled]="!form.valid"
+    >
+      {{ editMode ? "Update" : "Add" }}
+    </button>
+  </div>
+</form>
